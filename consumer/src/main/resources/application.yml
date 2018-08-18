@@ -1,0 +1,3 @@
+microservice:
+  ms-2-productor:
+    host: http://localhost:8002
