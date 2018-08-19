@@ -2,6 +2,7 @@ package com.consumidor.service;
 import com.consumidor.repository.adapter.ProducerRestAdapter;
 import com.consumidor.request.CreateSoftwareFactoryRequestBody;
 import com.consumidor.service.builder.SoftwareFactoryBuilder;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,9 @@ public class ProducerRestAdapterService {
         //call microservice endpoint
         String response= producerRestAdapter.callProducerCreateSotwareFactoryEndPoint(requestBody);
 
+        SoftwareFactoryBuilder softwareFactoryBuilder=new Gson().fromJson(response,SoftwareFactoryBuilder.class);
 
-        return null;
+        return softwareFactoryBuilder;
     }
 
     public String inyectaDependencia(){

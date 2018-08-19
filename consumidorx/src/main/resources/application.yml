@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 microservice:
   ms-2-productor:
     host: http://localhost:8002

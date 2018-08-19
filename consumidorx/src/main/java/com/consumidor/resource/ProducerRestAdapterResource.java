@@ -15,7 +15,7 @@ public class ProducerRestAdapterResource {
     @Autowired
     private ProducerRestAdapterService producerRestAdapterService;
 
-    @PostMapping("/producer")
+    @PostMapping(value="/consumer" )
     public SoftwareFactoryBuilder createSoftwareFactory(@RequestBody CreateSoftwareFactoryRequestBody requestBody){
         return producerRestAdapterService.createSoftwareFactory(requestBody);
     }
