@@ -16,7 +16,7 @@ org.springframework.cloud.contract.spec.Contract.make {
                 description: $(c(regex(nonBlank())))
         )
         headers {
-          contentType(applicationJsonUtf8())
+          contentType(applicationJson())
         }
     }
     response {
@@ -24,7 +24,7 @@ org.springframework.cloud.contract.spec.Contract.make {
         body(   name: $(p(fromRequest().body('name'))),
                 description: $(p(fromRequest().body('description'))))
         headers {
-            contentType(applicationJsonUtf8())
+            contentType(applicationJson())
         }
     }
 }

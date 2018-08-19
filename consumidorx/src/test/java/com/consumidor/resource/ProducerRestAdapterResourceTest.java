@@ -4,6 +4,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
+import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,6 +24,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestPropertySource(locations = "classpath:application-test.yml")
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
+@AutoConfigureStubRunner(
+        repositoryRoot="git://https://github.com/Ignaciojeria/Consumer-driven-perfect-contracts-Stubs",
+        ids="com:productor:0.0.1-SNAPSHOT:+:stubs:8002",
+        stubsMode = StubRunnerProperties.StubsMode.REMOTE
+)
 public class ProducerRestAdapterResourceTest {
 
     @Autowired
@@ -35,7 +42,7 @@ public class ProducerRestAdapterResourceTest {
                 post("/consumer")
                         .contentType(APPLICATION_JSON_UTF8_VALUE)
                         .content(body))
-                //.andExpect(content().contentType(APPLICATION_JSON_UTF8_VALUE))
+                //.andExpect(content().contentType(APPLICATION_JSON))
                 //Pasa el test siempre y cuando se resuelva correctamente la solicitud Http al endPoint /account
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
                 //El retorno del Json de la solicitud http espera un objeto que dentro se sus atributos clave:valor contiene: ("nombre":"ignacio")

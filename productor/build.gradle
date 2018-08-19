@@ -4,6 +4,9 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		//Indicamos repositorio local para guardar los stubs
+		mavenLocal()
+
 		maven {
 			url 'https://repo.spring.io/libs-snapshot'
 		}
@@ -33,6 +36,8 @@ group = 'com'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+
+
 repositories {
 	mavenCentral()
 	maven {
@@ -44,6 +49,10 @@ repositories {
 ext {
 	springCloudVersion = 'Finchley.SR1'
 }
+
+
+
+
 
 
 
