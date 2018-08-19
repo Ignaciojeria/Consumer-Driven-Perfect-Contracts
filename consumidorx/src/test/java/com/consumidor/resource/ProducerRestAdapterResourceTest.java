@@ -28,7 +28,7 @@ public class ProducerRestAdapterResourceTest {
     private MockMvc mockMvc;
 
     @Test
-    public void shouldCreatecreateSoftwareFactory() throws Exception{ 
+    public void shouldCreatecreateSoftwareFactory() throws Exception{
         String body="{\"name\":\"Sofware AA company\",\"description\":\"Compania de desarrollo de software en estado beta\"}";
 
         mockMvc.perform(
