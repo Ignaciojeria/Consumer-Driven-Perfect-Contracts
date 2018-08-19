@@ -4,9 +4,19 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		maven {
+			url 'https://repo.spring.io/libs-snapshot'
+		}
 	}
 	dependencies {
+		classpath "io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE"
+
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+
+		// if using Stub Runner (consumer side) only remove this dependency
+		classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:2.0.2.BUILD-SNAPSHOT"
+
+
 	}
 }
 
@@ -15,6 +25,9 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+apply plugin: 'spring-cloud-contract'
+
+
 
 group = 'com'
 version = '0.0.1-SNAPSHOT'
@@ -22,12 +35,17 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven {
+		url 'https://repo.spring.io/libs-snapshot'
+	}
 }
 
 
 ext {
 	springCloudVersion = 'Finchley.SR1'
 }
+
+
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -37,13 +55,29 @@ dependencies {
 	//Fluent Json Builder->  https://mvnrepository.com/artifact/org.jglue.fluent-json/fluent-json
 	compile group: 'org.jglue.fluent-json', name: 'fluent-json', version: '2.0.3'
 
+	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-contract-maven-plugin
+	compile group: 'org.springframework.cloud', name: 'spring-cloud-contract-maven-plugin', version: '2.0.1.RELEASE'
+
+
 	runtime('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.cloud:spring-cloud-starter-contract-verifier')
+	testCompile 'io.rest-assured:rest-assured:3.1.1'
+
 }
+
+// In this section you define all Spring Cloud Contract Verifier Gradle Plugin properties
+contracts {
+	baseClassForTests = 'com.productor.contracts.ContractTest'
+	// fully qualified name to a class that will be the base class for your generated test classes
+}// Unnecessary if you're using Spring Cloud Stub Runner only
 
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+
 	}
 }
+
+
+

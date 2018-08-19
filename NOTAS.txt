@@ -1,0 +1,19 @@
+Customer-Productor
+Account-Mannager-Consumidor
+
+Proceso: 
+
+-Tenemos definido un contrato que nos sirve para levantarnos stubs
+que reproduzcan ese comportamiento (consumidor)
+
+-El test se define en la ruta : src/test/resources/contracts (productor)
+
+-Se debe definir la clase sobre la que va a extender el test generado (productor)
+
+-Se debe indicar el paquete en el cual está la clase que se extiende sobre los tests generados en build.gradle (productor)
+
+-Se ejecuta gradle build o mvn clean install en su defecto para auto-generar codigo del test (productor)
+
+-El codigo auto-generado del test queda en la ruta: build/generated-test-sources
+
+-El test se escribe en groovy

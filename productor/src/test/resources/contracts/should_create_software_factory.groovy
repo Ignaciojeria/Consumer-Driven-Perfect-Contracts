@@ -12,8 +12,8 @@ org.springframework.cloud.contract.spec.Contract.make {
         method 'POST'
         url '/producer'
         body(
-                name: $(c(regex(nonBlank())).p('xxx')),
-                description: $(c(regex(nonBlank())).p('xxx'))
+                name: $(c(regex(nonBlank()))),
+                description: $(c(regex(nonBlank())))
         )
         headers {
           contentType(applicationJsonUtf8())
